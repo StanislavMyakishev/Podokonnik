@@ -17,4 +17,4 @@
 * Стили: Vuetify
 * Работа с API: Axios
 
-![Схема фронт](https://github.com/StanislavMyakishev/Podokonnik/raw/master/scheme.png) 
+![](https://github.com/StanislavMyakishev/Podokonnik/raw/master/Architechture_scheme.png) 
