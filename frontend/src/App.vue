@@ -1,38 +1,48 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+    <div id="app">
+        <v-app class="body">
+            <div class="wrapper">
+                <app-header></app-header>
+                <v-container fluid>
+                    <v-layout>
+                        <router-view></router-view>
+                    </v-layout>
+                </v-container>
+            </div>
+            <app-footer></app-footer>
+        </v-app>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+    import Footer from './components/core/Footer'
+    import Header from './components/core/Header'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      //
+    export default {
+        data() {
+            return {
+            }
+        },
+        components: {
+            appFooter: Footer,
+            appHeader: Header,
+        },
     }
-  }
-}
 </script>
+
+<style scoped>
+
+    #app {
+        background-color: #FFFFFF;
+    }
+
+    .body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wrapper {
+        flex: 1 0 auto;
+    }
+
+</style>
