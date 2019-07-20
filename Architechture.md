@@ -3,7 +3,7 @@
 ## Бэк-энд
 
 * Язык: питон
-* MVC фреймворк Django
+* MVC фреймворк Django + Django Rest API
 * БД - SQLite3
 
 ![Архитектура БД](https://github.com/StanislavMyakishev/Podokonnik/raw/master/DB.png)
