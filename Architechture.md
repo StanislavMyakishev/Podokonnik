@@ -6,7 +6,7 @@
 * MVC фреймворк Django
 * БД - SQLite3
 
-![Архитектура БД](https://github.com/StanislavMyakishev/Podokonnik/raw/master/БД.png)
+![Архитектура БД](https://github.com/StanislavMyakishev/Podokonnik/raw/master/DB.png)
 
 ## Фронт-энд
 
