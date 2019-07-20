@@ -1,11 +1,14 @@
 .DS_Store
-project/frontend/node_modules/*
-project/frontend/public/*
+frontend/node_modules/*
+frontend/public/*
 /dist
-project/project/*
-project/db.sqlite3
-project/manage.py
-project/requirements.txt
+project/*
+db.sqlite3
+manage.py
+requirements.txt
+backend/*
+
+
 # local env files
 .env.local
 .env.*.local
