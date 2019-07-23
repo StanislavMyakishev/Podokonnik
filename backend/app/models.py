@@ -13,7 +13,6 @@ class Author(models.Model):
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
-
     def __str__(self):
         return str(self.user) + ' - ' + self.user.first_name + ' ' + self.user.last_name
 
