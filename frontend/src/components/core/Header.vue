@@ -21,7 +21,7 @@
                             :key="link.title"
                             :to="link.url"
                             flat
-                            @click="logout(link.title)">
+                    >
                         <v-icon left>{{link.icon}}</v-icon>
                         {{link.title}}
                     </v-btn>
@@ -35,7 +35,7 @@
                     <v-list-tile
                             v-for="link of links"
                             :key="link.title"
-
+                            :to="link.url"
                     >
                         <v-list-tile-action>
                             <v-icon>{{link.icon}}</v-icon>
@@ -61,7 +61,7 @@
             }, {
                 title: 'Регистрация',
                 icon: 'star',
-                url: '/registration'
+                url: '/registartion'
             }, {
                 title: 'Категории',
                 icon: 'home',
