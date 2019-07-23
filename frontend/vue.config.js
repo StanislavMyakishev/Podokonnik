@@ -3,7 +3,9 @@ const BundleTracker = require("webpack-bundle-tracker");
 module.exports = {
     baseUrl: "http://0.0.0.0:8080/",
     outputDir: './dist/',
-
+    devServer: {
+        historyApiFallback: true
+    },
     chainWebpack: config => {
 
         config.optimization
