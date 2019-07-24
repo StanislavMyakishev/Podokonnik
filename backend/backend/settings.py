@@ -26,7 +26,7 @@ SECRET_KEY = '(z-b3w2j_60a8l#^6_c#&riu@(gwxrbgcv)+xtl&_bbg!o(5$$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_filters',
     'app',
 ]
 
