@@ -1,5 +1,4 @@
 .DS_Store
-
 frontend/public/*
 /dist
 
@@ -22,6 +21,6 @@ yarn-error.log*
 *.sw?
 
 #backend
-backend/backend/__pycache__/*
-backend/app/__pycache__/*
-backend/app/migrations/*
+backend/backend/__pycache__/
+backend/app/__pycache__/
+backend/app/migrations/
