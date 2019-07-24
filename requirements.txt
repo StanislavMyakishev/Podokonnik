@@ -3,3 +3,5 @@ djangorestframework
 django-filter
 django-allauth
 django-rest-auth
+django-webpack-loader
+django-cors-headers

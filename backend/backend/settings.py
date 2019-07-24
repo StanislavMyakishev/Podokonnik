@@ -47,9 +47,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'django_filters',
     'app',
+    'webpack_loader',
+    'corsheaders',
 ]
 
 ##AUTH_USER_MODEL = 'app.Author'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,9 +62,30 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://0.0.0.0:8080',
+]
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://0.0.0.0:8080',
+]
+
+
+
+FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': DEBUG,
+        'BUNDLE_DIR_NAME': '/bundles/',  # must end with slash
+        'STATS_FILE': os.path.join(FRONTEND_DIR, 'webpack-stats.json'),
+    }
+}
 
 
 TEMPLATES_ROOT = os.path.join(BASE_DIR, "templates")
