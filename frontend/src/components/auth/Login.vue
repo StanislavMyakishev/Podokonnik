@@ -1,5 +1,4 @@
 <!--ПОЛНОСТЬЮ РАБОЧАЯ СТРАНИЦА-->
-
 <template>
     <v-content>
         <v-container fluid fill-height>

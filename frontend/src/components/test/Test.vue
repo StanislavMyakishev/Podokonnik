@@ -1,41 +1,85 @@
 <template>
-    <v-app>
-        <v-layout justify-center>
-            <v-flex xs12 sm8>
-                <v-card
-                        min-width="500"
-                        min-height="500"
-                >
-                    <v-card-text>{{ads}}</v-card-text>
-                    <ul v-if="errors && errors.length">
-                        <li v-for="error of errors" :key="error.message">
-                            {{error.message}}
-                        </li>
-                    </ul>
+    <v-container grid-list-md text-center fluid>
+        <v-layout wrap>
+            <v-flex xl3 l4 md4 sm6 xs12
+                    v-for="ad in ads"
+                    :key="ad.id"
+            >
+                <v-card dark color="primary" :elevation="8">
+                    <v-card-title class="justify-center ma-auto">
+                        <h1 class="text-xs-center justify-center display-1 text-truncate">
+                            {{ad.name}}
+                        </h1>
+                    </v-card-title>
+                    <v-card-text class="">
+                        <h1 class="text-xs-center justify-center  pointer text-truncate ma-auto" > {{ad.descr}}</h1>
+                        <h2 class="text-xs-center justify-center text-truncate my-2"> {{ad.price}} </h2>
+                        <h3 class="text-xs-center justify-center text-truncate ma-auto"> {{ad.date}}</h3>
+                    </v-card-text>
                 </v-card>
             </v-flex>
         </v-layout>
-    </v-app>
+    </v-container>
 </template>
 
 <script>
 
-    import axios from 'axios'
-    const url = 'http://127.0.0.1:8000/api/ads/';
+    // import axios from 'axios'
+    // const url = 'http://127.0.0.1:8000/api/ads/';
 
     export default {
         data() {
             return {
-                ads: null,
+                ads: [{
+                    id: 1,
+                    name: 'Гавно на палочке из гавно-говна',
+                    descr: 'Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                }, {
+                    id: 2,
+                    name: 'Гавно',
+                    descr: 'Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатбСосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                }, {
+                    id: 3,
+                    name: 'Гавно на палочке',
+                    descr: 'Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                }, {
+                    id: 4,
+                    name: 'Гавно на палочке',
+                    descr: 'Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                }, {
+                    id: 5,
+                    name: 'Гавно на палочке',
+                    descr: 'Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                },{
+                    id: 6,
+                    name: 'Гавно на палочке',
+                    descr: 'Сосать + лежатб',
+                    price: '40 гривен',
+                    date: '02.28.1812'
+                }, ],
                 errors: [],
             };
         },
-        mounted() {
-            axios
-                .get(url)
-                .then(response => (this.ads = response.data))
-                .catch(e => {this.errors.push(e)})
-        },
+        // mounted() {
+        //     axios
+        //         .get(url)
+        //         .then(response => (this.ads = response.data))
+        //         .catch(e => {this.errors.push(e)})
+        // },
     }
 
 </script>
+
+<style>
+
+</style>

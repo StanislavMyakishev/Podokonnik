@@ -66,6 +66,10 @@
                 title: 'Категории',
                 icon: 'home',
                 url: '/categories',
+            },{
+                title: 'Новое объявление',
+                icon: 'add_box',
+                url: '/new',
             }, {
                 title: 'Мои объявления',
                 icon: 'face',
