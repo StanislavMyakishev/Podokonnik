@@ -40,18 +40,19 @@
                                         :rules="selectRules"
                                         required
                                 ></v-select>
-                                <v-checkbox
-                                        v-model="checkbox"
-                                        label="Я согласен с условиями Пользовательского соглашения"
-                                        :rules="checkboxRules"
-                                        required
-                                ></v-checkbox>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn @click="postPost" :disabled="!valid" class="secondary">Оформить</v-btn>
-                            <v-btn @click="clear" class="error">Стереть</v-btn>
+                            <v-btn
+                                    @click="postPost"
+                                    :disabled="!valid"
+                                    class="secondary"
+                            >Разместить</v-btn>
+                            <v-btn
+                                    @click="clear"
+                                    class="error"
+                            >Стереть</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -67,6 +68,7 @@
 
     export default {
         data: () => ({
+            valid: true,
             errors: [],
             name: '',
             descr: '',
@@ -76,8 +78,6 @@
                 {value: 1, text: 'Продукты'},
                 {value: 2, text: 'Электроника'},
             ],
-            checkbox: false,
-            valid: true,
             nameRules: [
                 v => !!v || 'Назовите объявление',
                 v => (v && v.length >= 10) || 'Название объявления должно содержать минимум 10 символов'
@@ -92,9 +92,6 @@
             selectRules: [
                 v => !!v || "Выберите категорию объявления"
             ],
-            checkboxRules: [
-                v => !!v || 'Чтобы продолжить Вы должны принять условия Пользовательского Соглашения'
-            ]
         }),
         methods: {
             postPost() {
