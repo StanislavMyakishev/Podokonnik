@@ -3,7 +3,7 @@
         <v-layout>
             <v-toolbar app dark color="primary">
                 <v-toolbar-side-icon
-                        class="hidden-md-and-up"
+                        class="hidden-lg-and-up"
                         @click="drawer = !drawer"
                 ></v-toolbar-side-icon>
                 <v-toolbar-title class="display-1">
@@ -15,7 +15,7 @@
                     </router-link>
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
-                <v-toolbar-items class="hidden-sm-and-down">
+                <v-toolbar-items class="hidden-md-and-down">
                     <v-btn
                             v-for="link of links"
                             :key="link.title"
@@ -55,22 +55,14 @@
         data: () => ({
             drawer: false,
             links: [{
-                title: 'Вход',
-                icon: 'lock',
-                url: '/login'
-            }, {
-                title: 'Регистрация',
-                icon: 'star',
-                url: '/registartion'
-            }, {
+                title: 'Главная',
+                icon: 'home',
+                url: '/',
+            },{
                 title: 'Категории',
                 icon: 'home',
                 url: '/categories',
             },{
-                title: 'Новое объявление',
-                icon: 'add_box',
-                url: '/new',
-            }, {
                 title: 'Мои объявления',
                 icon: 'face',
                 url: '/myads',
@@ -81,9 +73,12 @@
             },{
                 title: 'Личный кабинет',
                 icon: 'person',
-                url: '/profilex',
-            },
-            ]
+                url: '/profile',
+            },{
+                title: 'Вход',
+                icon: 'lock',
+                url: '/login'
+            },]
         })
     }
 </script>
