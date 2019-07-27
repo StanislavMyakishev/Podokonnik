@@ -18,30 +18,6 @@
                                     lazy-validation>
                                 <v-text-field
                                         prepend-icon="person"
-                                        class="compact-form"
-                                        name="first_name"
-                                        label="Имя"
-                                        type="text"
-                                        v-model="first_name"
-                                ></v-text-field>
-                                <v-text-field
-                                        prepend-icon="person"
-                                        name="last_name"
-                                        class="compact-form"
-                                        label="Фамилия"
-                                        type="text"
-                                        v-model="last_name"
-                                ></v-text-field>
-                                <v-text-field
-                                        prepend-icon="home"
-                                        class="compact-form"
-                                        name="room_number"
-                                        label="Номер комнаты"
-                                        type="text"
-                                        v-model="room_number"
-                                ></v-text-field>
-                                <v-text-field
-                                        prepend-icon="person"
                                         name="email"
                                         label="Email"
                                         type="email"
@@ -66,6 +42,12 @@
                                         v-model="confirmPassword"
                                         :rules="confirmPasswordRules"
                                 ></v-text-field>
+                                <v-checkbox
+                                        v-model="checkbox"
+                                        label="Я согласен с условиями Пользовательского соглашения"
+                                        :rules="checkboxRules"
+                                        required
+                                ></v-checkbox>
                             </v-form>
                         </v-card-text>
                         <v-card-actions>
@@ -88,13 +70,11 @@
     export default {
         data() {
             return {
-                first_name: '',
-                last_name: '',
                 email: '',
                 password: '',
-                room_number: '',
-                valid: false,
                 confirmPassword: '',
+                valid: true,
+                checkbox: false,
                 emailRules: [
                     v => !!v || 'Введите Ваш e-mail',
                     v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
@@ -107,6 +87,9 @@
                     v => !!v || 'Подтвердите пароль',
                     v => v === this.password || 'Пароли должны совпадать'
                 ],
+                checkboxRules: [
+                    v => !!v || 'Чтобы продолжить Вы должны принять условия Пользовательского Соглашения'
+                ]
             }
         },
     }
