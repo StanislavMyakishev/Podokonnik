@@ -43,6 +43,20 @@
                             </v-btn>
                         </v-card-actions>
                     </v-card>
+                    <v-card
+                            class="elevation-0">
+                        <v-card-title>
+                            Ещё не зарегистрированы?
+                        </v-card-title>
+                        <v-card-actions>
+                            <router-link
+                                to="/registration">
+                                <v-btn>
+                                    Зарегистрироваться
+                                </v-btn>
+                            </router-link>
+                        </v-card-actions>
+                    </v-card>
                 </v-flex>
             </v-layout>
         </v-container>
