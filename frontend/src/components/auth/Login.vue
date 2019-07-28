@@ -49,12 +49,9 @@
                             Ещё не зарегистрированы?
                         </v-card-title>
                         <v-card-actions>
-                            <router-link
-                                to="/registration">
-                                <v-btn>
-                                    Зарегистрироваться
-                                </v-btn>
-                            </router-link>
+                            <v-btn :to="{register}">
+                                Зарегистрироваться
+                            </v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -67,6 +64,7 @@
     export default {
         data() {
             return {
+                register: '/registration',
                 email: '',
                 password: '',
                 valid: false,
