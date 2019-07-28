@@ -54,7 +54,7 @@
                             <v-spacer></v-spacer>
                             <v-btn
                                     color="secondary"
-                                    @click="onSubmit"
+                                    @click="createUser"
                                     :disabled="!valid"
                             >Создать аккаунт
                             </v-btn>
@@ -67,6 +67,9 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    const url = 'http://127.0.0.1:8000/api/registration/';
+
     export default {
         data() {
             return {
@@ -92,5 +95,24 @@
                 ]
             }
         },
+        methods: {
+            createUser() {
+                if (this.$refs.form.validate()) {
+                    const user = {
+                        "email": this.email,
+                        "password1" : this.password,
+                        "password2" : this.confirmPassword,
+                    }
+                    axios
+                        .post(url, JSON.stringify(user), {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                        .catch(e => {this.errors.push(e)})
+                }
+            },
+        }
     }
 </script>
