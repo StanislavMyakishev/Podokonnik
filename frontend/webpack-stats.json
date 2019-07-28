@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 {"status":"done","publicPath":"http://0.0.0.0:8080/","chunks":{"app":[{"name":"app.js","publicPath":"http://0.0.0.0:8080/app.js","path":"/Users/stas/Projects/Podokonnik/frontend/dist/app.js"},{"name":"app.6d0984968239b7464003.hot-update.js","publicPath":"http://0.0.0.0:8080/app.6d0984968239b7464003.hot-update.js","path":"/Users/stas/Projects/Podokonnik/frontend/dist/app.6d0984968239b7464003.hot-update.js"},{"name":"app.6d0984968239b7464003.hot-update.js","publicPath":"http://0.0.0.0:8080/app.6d0984968239b7464003.hot-update.js","path":"/Users/stas/Projects/Podokonnik/frontend/dist/app.6d0984968239b7464003.hot-update.js"}]}}
-=======
-{"status":"done","publicPath":"http://0.0.0.0:8080/","chunks":{"app":[{"name":"app.js","publicPath":"http://0.0.0.0:8080/app.js","path":"/home/ksercs/Podokonnik/frontend/dist/app.js"}]}}
->>>>>>> 72fdc98d55bfd40e651b9e0942b7f091bedd953a
