@@ -3,6 +3,7 @@ frontend/public/
 frontend/node_modules/
 /dist
 /node_modules/
+frontend/webpack-stats.json
 
 # local env files
 .env.local
