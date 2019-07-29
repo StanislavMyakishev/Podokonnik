@@ -1,6 +1,4 @@
-<!--ПОЛНОСТЬЮ РАБОЧАЯ СТРАНИЦА-->
-
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
     <v-content>
         <v-container fluid fill-height>
             <v-layout align-center justify-center>
@@ -8,14 +6,14 @@
                     <v-card
                             class="elevation-10">
                         <v-toolbar
-                                dark color="primary lighten-1">
-                            <v-toolbar-title>Регистрация</v-toolbar-title>
-                        </v-toolbar>
+                            dark color="primary lighten-1">
+                        <v-toolbar-title>Регистрация</v-toolbar-title>
+                    </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation>
+                                    :lazy-validation="lazy">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -50,8 +48,7 @@
                                 ></v-checkbox>
                             </v-form>
                         </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
+                        <v-card-actions class="justify-center">
                             <v-btn
                                     color="secondary"
                                     @click="createUser"

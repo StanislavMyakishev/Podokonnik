@@ -8,7 +8,6 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css' // Ensure
 
 Vue.use(Vuetify, {
   theme: {
-    iconfont: 'md',
     primary: '#03A9F4',
     secondary: '#0288D1',
     accent: '#ff5722',
