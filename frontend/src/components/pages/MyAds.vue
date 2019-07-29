@@ -2,12 +2,12 @@
     <v-container grid-list-md text-center fluid>
         <v-layout wrap>
             <v-flex xl3 l4 md4 sm6 xs12
-                    v-for="(ad) in ads"
+                    v-for="(ad, index) in ads"
                     :key="ad.id">
                 <v-card dark color="primary" :elevation="8">
                     <v-card-actions class="justify-end">
                         <v-btn
-                                @click="showDelete = true"
+                                @click="pushIndex(index)"
                                 class="mx-2"
                                 fab dark small color="primary">
                             <v-icon dark>remove</v-icon>
@@ -44,7 +44,7 @@
                         <v-btn
                                 color="error"
                                 text
-                                @click="showDelete = false">
+                                @click="deleteAd()">
                             Удалить
                         </v-btn>
                     </v-card-actions>
@@ -63,6 +63,7 @@
             return {
                 showDelete: false,
                 ads: [],
+                id: NaN,
                 errors: [],
             };
         },
@@ -73,10 +74,17 @@
                 .catch(e => {this.errors.push(e)})
         },
         methods: {
-            deleteAd(index) {
-                axios.delete(url, {data: {id: index}})
+            pushIndex(index){
+                this.id = index;
+                this.showDelete = true;
+            },
+            deleteAd(index = this.id + 1) {
+                // eslint-disable-next-line no-console
+                console.log(index);
+                axios.delete(url + index + '/')
                     .then(() => (this.ads.slice(index, 1)))
                     .catch(e => {this.errors.push(e)});
+                this.showDelete = false;
             }
         }
     }
