@@ -1,8 +1,9 @@
 from django.conf.urls import url, include
+from django.urls import path
 
 from allauth.account.views import ConfirmEmailView
 
-from .views import AdView, SingleAdView, CategoryView, SingleCategoryView#, CreateUserView
+from .views import AdView, SingleAdView, CategoryView, SingleCategoryView
 from . import views
 
 from rest_auth.views import (
@@ -11,10 +12,10 @@ from rest_auth.views import (
 )
 
 urlpatterns = [
-    url('ads/', AdView.as_view()),
-    url('ads/<int:pk>', SingleAdView.as_view()),
-    url('categories/', CategoryView.as_view()),
-    url('categories/<int::pk>', SingleCategoryView.as_view()),
+    path('ads/', AdView.as_view()),
+    path('ads/<int:pk>', SingleAdView.as_view()),
+    path('categories/', CategoryView.as_view()),
+    path('categories/<int:pk>', SingleCategoryView.as_view()),
     # path('users/register/', CreateUserView.as_view()),
 
 
