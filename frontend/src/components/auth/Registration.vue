@@ -1,21 +1,22 @@
-<!--ПОЛНОСТЬЮ РАБОЧАЯ СТРАНИЦА-->
-
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
+<template>
     <v-content>
         <v-container fluid fill-height>
-            <v-layout align-center justify-center>
+            <v-layout
+                    v-show="!showConfirmPassword"
+                    align-center
+                    justify-center>
                 <v-flex xs12 sm8 md8>
                     <v-card
                             class="elevation-10">
                         <v-toolbar
-                                dark color="primary lighten-1">
-                            <v-toolbar-title>Регистрация</v-toolbar-title>
-                        </v-toolbar>
+                            dark color="primary lighten-1">
+                        <v-toolbar-title>Регистрация</v-toolbar-title>
+                    </v-toolbar>
                         <v-card-text>
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation>
+                                    :lazy-validation="lazy">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -43,6 +44,7 @@
                                         :rules="confirmPasswordRules"
                                 ></v-text-field>
                                 <v-checkbox
+                                        color="secondary"
                                         v-model="checkbox"
                                         label="Я согласен с условиями Пользовательского соглашения"
                                         :rules="checkboxRules"
@@ -50,8 +52,7 @@
                                 ></v-checkbox>
                             </v-form>
                         </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
+                        <v-card-actions class="justify-center">
                             <v-btn
                                     color="secondary"
                                     @click="createUser"
@@ -59,6 +60,32 @@
                             >Создать аккаунт
                             </v-btn>
                         </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+            <v-layout
+                    v-show="showConfirmPassword"
+                    align-center
+                    justify-center>
+                <v-flex xs12 sm8 md8>
+                    <v-card
+                            class="elevation-10">
+                        <v-card-title>
+                            <v-card-text>
+                                <h1 class="text-xs-center primary--text lighten-1">
+                                    На ваш email отправлено письмо. Пожалуйста, перейдите по ссылке в письме для подтверждения своего email.
+                                </h1>
+                            </v-card-text>
+                            <v-layout justify-center>
+                                <v-card-actions>
+                                    <a
+                                            class="title secondary--text lighten-1"
+                                            v-bind:onclick="sendVerification">
+                                        Письмо не пришло. Отправить ещё раз
+                                    </a>
+                                </v-card-actions>
+                            </v-layout>
+                        </v-card-title>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -78,6 +105,7 @@
                 confirmPassword: '',
                 valid: true,
                 checkbox: false,
+                showConfirmPassword: false,
                 emailRules: [
                     v => !!v || 'Введите Ваш e-mail',
                     v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
@@ -96,6 +124,7 @@
             }
         },
         methods: {
+            sendVerification() {},
             createUser() {
                 if (this.$refs.form.validate()) {
                     const user = {
@@ -111,6 +140,7 @@
                             }
                         })
                         .catch(e => {this.errors.push(e)})
+                    this.showConfirmPassword = true;
                 }
             },
         }
