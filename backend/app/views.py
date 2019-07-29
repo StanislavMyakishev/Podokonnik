@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from django.shortcuts import get_object_or_404
@@ -18,7 +18,7 @@ def null_view(request):
 def complete_view(request):
     return Response("Email account is activated")
 
-class AdView(generics.ListCreateAPIView):
+class AdView(ListCreateAPIView):
     model = Ad
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
@@ -26,21 +26,17 @@ class AdView(generics.ListCreateAPIView):
     filter_fields = ('category__name', 'author')
 
 
-class SingleAdView(generics.RetrieveUpdateDestroyAPIView):
+class SingleAdView(RetrieveUpdateDestroyAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
 
-class CategoryView(generics.ListCreateAPIView):
+class CategoryView(ListCreateAPIView):
     model = Category
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     filter_backends = [DjangoFilterBackend]
     filter_fields = ('name',)
 
-class SingleCategoryView(generics.RetrieveUpdateDestroyAPIView):
+class SingleCategoryView(RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-# class CreateUserView(generics.CreateAPIView):
-#     queryset = Author.objects.all()
-#     serializer_class = UserSerializer

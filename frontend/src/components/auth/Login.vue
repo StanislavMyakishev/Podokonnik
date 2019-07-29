@@ -37,6 +37,7 @@
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn
+                                    @click="loginUser"
                                     color="secondary"
                                     :disabled="!valid"
                             >Войти
@@ -50,6 +51,9 @@
 </template>
 
 <script>
+    import axios from 'axios'
+    const url = 'http://127.0.0.1:8000/api/login/';
+
     export default {
         data() {
             return {
@@ -66,5 +70,23 @@
                 ]
             }
         },
+        methods: {
+            loginUser() {
+                if (this.$refs.form.validate()) {
+                    const user = {
+                        "email": this.email,
+                        "password" : this.password
+                    }
+                    axios
+                        .post(url, JSON.stringify(user), {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                        .catch(e => {this.errors.push(e)})
+                }
+            },
+        }
     }
 </script>
