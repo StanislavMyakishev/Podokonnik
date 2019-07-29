@@ -54,8 +54,8 @@
                         </v-card-text>
                         <v-card-actions class="justify-center">
                             <v-btn
-                                    color="secondary"
                                     @click="createUser"
+                                    color="secondary"
                                     :disabled="!valid"
                             >Создать аккаунт
                             </v-btn>
@@ -103,6 +103,7 @@
                 email: '',
                 password: '',
                 confirmPassword: '',
+                lazy: true,
                 valid: true,
                 checkbox: false,
                 showConfirmPassword: false,

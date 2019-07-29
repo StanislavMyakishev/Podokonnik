@@ -15,20 +15,24 @@
                         </v-toolbar>
                         <v-card-text>
                             <v-form
-                                    ref="form"
                                     v-model="valid"
-                                    :lazy-validation="true">
+                                    ref="form"
+                                    :lazy-validation="lazy">
                                 <v-text-field
+                                        prepend-icon="person"
+                                        name="email"
+                                        label="Email"
+                                        type="email"
                                         v-model="email"
                                         :rules="emailRules"
-                                        label="Email"
-                                        required
                                 ></v-text-field>
                                 <v-text-field
+                                        prepend-icon="lock"
+                                        name="password"
+                                        label="Пароль"
+                                        type="password"
                                         v-model="password"
                                         :rules="passwordRules"
-                                        label="Пароль"
-                                        required
                                 ></v-text-field>
                             </v-form>
                         </v-card-text>
@@ -76,7 +80,7 @@
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    :lazy-validation="true">
+                                    :lazy-validation="lazy">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -118,10 +122,11 @@
     export default {
         data() {
             return {
-                register: '/registration',
-                showResetWindow: false,
                 email: '',
                 password: '',
+                register: '/registration',
+                showResetWindow: false,
+                lazy: true,
                 valid: true,
                 emailRules: [
                     v => !!v || 'Введите Ваш e-mail',
