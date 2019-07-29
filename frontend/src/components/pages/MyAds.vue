@@ -9,8 +9,8 @@
                         <v-btn
                                 @click="pushIndex(index)"
                                 class="mx-2"
-                                fab dark small color="primary">
-                            <v-icon dark>remove</v-icon>
+                                fab dark small color="accent">
+                            <v-icon dark>close</v-icon>
                         </v-btn>
                     </v-card-actions>
                     <v-card-title class="justify-center ma-auto">
