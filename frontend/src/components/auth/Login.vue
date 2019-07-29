@@ -76,7 +76,7 @@
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    lazy-validation>
+                                    :lazy-validation="lazy">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
