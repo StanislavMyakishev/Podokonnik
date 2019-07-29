@@ -115,10 +115,10 @@
                 }
             },
             clear() {
-                this.name = '',
-                    this.descr = '',
-                    this.select = null,
-                    this.checkbox = false
+                this.name = '';
+                this.descr = '';
+                this.select = null;
+                this.checkbox = false;
             },
         }
     }

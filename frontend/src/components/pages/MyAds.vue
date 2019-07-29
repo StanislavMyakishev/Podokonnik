@@ -1,16 +1,18 @@
 <template>
-    <v-container grid-list-md text-center fluid>
+    <v-container grid-list-md text-center fluid :key="renderKey">
         <v-layout wrap>
             <v-flex xl3 l4 md4 sm6 xs12
-                    v-for="(ad, index) in ads"
+                    v-for="(ad) in ads"
                     :key="ad.id">
-                <v-card dark color="primary" :elevation="8">
+                <v-card
+                        dark color="primary"
+                        :elevation="8">
                     <v-card-actions class="justify-end">
                         <v-btn
-                                @click="pushIndex(index)"
+                                @click="pushIndex(ad.id)"
                                 class="mx-2"
-                                fab dark small color="primary">
-                            <v-icon dark>remove</v-icon>
+                                fab dark small color="accent">
+                            <v-icon dark>close</v-icon>
                         </v-btn>
                     </v-card-actions>
                     <v-card-title class="justify-center ma-auto">
@@ -61,6 +63,7 @@
     export default {
         data() {
             return {
+                renderKey: 0,
                 showDelete: false,
                 ads: [],
                 id: NaN,
@@ -78,15 +81,16 @@
                 this.id = index;
                 this.showDelete = true;
             },
-            deleteAd(index = this.id + 1) {
-                // eslint-disable-next-line no-console
-                console.log(index);
-                axios.delete(url + index)
-                    .then(() => (this.ads.slice(index, 1)))
+            deleteAd() {
+                axios.delete(url + this.id)
+                    .then(() => {this.ads.slice(this.id, 1)})
+                    .then(() => {this.renderKey += 1})
+                    .then(() => {this.showDelete = false})
                     .catch(e => {this.errors.push(e)});
-                this.showDelete = false;
-            }
-        }
+                //temporary solution
+                window.location.reload();
+            },
+        },
     }
 </script>
 
