@@ -17,7 +17,7 @@
                             <v-form
                                     ref="form"
                                     v-model="valid"
-                                    :lazy-validation="lazy">
+                                    :lazy-validation="true">
                                 <v-text-field
                                         v-model="email"
                                         :rules="emailRules"
@@ -76,7 +76,7 @@
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    :lazy-validation="lazy">
+                                    :lazy-validation="true">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
@@ -89,7 +89,7 @@
                         </v-card-text>
                         <v-card-actions class="justify-center">
                             <v-btn
-                                    @click="empty"
+                                    @click="loginUser"
                                     color="secondary"
                                     :disabled="!valid"
                             >Восстановить пароль
@@ -148,7 +148,11 @@
                             }
                         })
                         .catch(e => {this.errors.push(e)})
-                },
+                }
+            },
+            passwordReset(){
+                this.showResetWindow = !this.showResetWindow
+            },
         }
     }
 </script>
