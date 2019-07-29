@@ -17,7 +17,7 @@
                             <v-form
                                     ref="form"
                                     v-model="valid"
-                                    :lazy-validation="lazy">
+                                    :lazy-validation="true">
                                 <v-text-field
                                         v-model="email"
                                         :rules="emailRules"
@@ -76,7 +76,7 @@
                             <v-form
                                     v-model="valid"
                                     ref="form"
-                                    :lazy-validation="lazy">
+                                    :lazy-validation="true">
                                 <v-text-field
                                         prepend-icon="person"
                                         name="email"
