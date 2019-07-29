@@ -1,7 +1,10 @@
 <template>
     <v-content>
         <v-container fluid fill-height>
-            <v-layout align-center justify-center>
+            <v-layout
+                    v-show="!showConfirmPassword"
+                    align-center
+                    justify-center>
                 <v-flex xs12 sm8 md8>
                     <v-card
                             class="elevation-10">
@@ -41,6 +44,7 @@
                                         :rules="confirmPasswordRules"
                                 ></v-text-field>
                                 <v-checkbox
+                                        color="secondary"
                                         v-model="checkbox"
                                         label="Я согласен с условиями Пользовательского соглашения"
                                         :rules="checkboxRules"
@@ -56,6 +60,32 @@
                             >Создать аккаунт
                             </v-btn>
                         </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+            <v-layout
+                    v-show="showConfirmPassword"
+                    align-center
+                    justify-center>
+                <v-flex xs12 sm8 md8>
+                    <v-card
+                            class="elevation-10">
+                        <v-card-title>
+                            <v-card-text>
+                                <h1 class="text-xs-center primary--text lighten-1">
+                                    На ваш email отправлено письмо. Пожалуйста, перейдите по ссылке в письме для подтверждения своего email.
+                                </h1>
+                            </v-card-text>
+                            <v-layout justify-center>
+                                <v-card-actions>
+                                    <a
+                                            class="title secondary--text lighten-1"
+                                            v-bind:onclick="sendVerification">
+                                        Письмо не пришло. Отправить ещё раз
+                                    </a>
+                                </v-card-actions>
+                            </v-layout>
+                        </v-card-title>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -75,6 +105,7 @@
                 confirmPassword: '',
                 valid: true,
                 checkbox: false,
+                showConfirmPassword: false,
                 emailRules: [
                     v => !!v || 'Введите Ваш e-mail',
                     v => /.+@.+/.test(v) || 'E-mail должен быть реальным'
@@ -93,6 +124,7 @@
             }
         },
         methods: {
+            sendVerification() {},
             createUser() {
                 if (this.$refs.form.validate()) {
                     const user = {
@@ -108,6 +140,7 @@
                             }
                         })
                         .catch(e => {this.errors.push(e)})
+                    this.showConfirmPassword = true;
                 }
             },
         }
