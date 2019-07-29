@@ -81,7 +81,7 @@
             deleteAd(index = this.id + 1) {
                 // eslint-disable-next-line no-console
                 console.log(index);
-                axios.delete(url + index + '/')
+                axios.delete(url + index)
                     .then(() => (this.ads.slice(index, 1)))
                     .catch(e => {this.errors.push(e)});
                 this.showDelete = false;
