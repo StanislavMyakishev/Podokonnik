@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework_tracking.mixins import LoggingMixin
 
 from .models import Ad, Category, Author
 from .serializers import AdSerializer, CategorySerializer, UserSerializer
@@ -18,7 +19,7 @@ def null_view(request):
 def complete_view(request):
     return Response("Email account is activated")
 
-class AdView(ListCreateAPIView):
+class AdView(LoggingMixin, ListCreateAPIView):
     model = Ad
     serializer_class = AdSerializer
     queryset = Ad.objects.all()
@@ -26,17 +27,17 @@ class AdView(ListCreateAPIView):
     filter_fields = ('category__name', 'author')
 
 
-class SingleAdView(RetrieveUpdateDestroyAPIView):
+class SingleAdView(LoggingMixin, RetrieveUpdateDestroyAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
 
-class CategoryView(ListCreateAPIView):
+class CategoryView(LoggingMixin, ListCreateAPIView):
     model = Category
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     filter_backends = [DjangoFilterBackend]
     filter_fields = ('name',)
 
-class SingleCategoryView(RetrieveUpdateDestroyAPIView):
+class SingleCategoryView(LoggingMixin, RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer

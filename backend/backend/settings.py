@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'app',
     'webpack_loader',
     'corsheaders',
+    'rest_framework_tracking'
 ]
 
 ##AUTH_USER_MODEL = 'app.Author'
@@ -63,9 +64,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'request_logging.middleware.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
+DEFAULT_CHARSET = 'utf-8'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -188,3 +191,54 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REQUEST_LOGGING_MAX_BODY_LENGTH = 200
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s  %(message)s', 'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'file_handler': {
+            'level': DEBUG and 'DEBUG' or 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': "site.log",
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 15,
+            'formatter': 'verbose',
+            'mode': 'w',
+            'encoding': 'utf-8'
+        },
+    },
+    'loggers': {
+        'api': {
+            'handlers': ['file_handler'],
+            'level': DEBUG and 'DEBUG' or 'INFO',
+        },
+        'django': {
+            'handlers': ['file_handler'],
+            'level': DEBUG and 'DEBUG' or 'INFO',
+        },
+        'django.request': {
+            'handlers': ['file_handler'],
+            'level': DEBUG and 'DEBUG' or 'INFO',
+        },
+        'django.db.backends': {
+            'handlers': ['file_handler'],
+            'level': DEBUG and 'INFO' or 'WARNING',
+            'propagate': False,
+        },
+    }
+}
