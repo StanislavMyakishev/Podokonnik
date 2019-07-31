@@ -1,10 +1,11 @@
 <template>
-    <v-container grid-list-md text-center fluid :key="renderKey">
+    <v-container grid-list-md text-center fluid>
         <v-layout wrap>
             <v-flex xl3 l4 md4 sm6 xs12
                     v-for="(ad) in ads"
                     :key="ad.id">
                 <v-card
+                        :key="renderKey"
                         dark color="primary"
                         :elevation="8">
                     <v-card-actions class="justify-end">
@@ -88,7 +89,8 @@
                     .then(() => {this.showDelete = false})
                     .catch(e => {this.errors.push(e)});
                 //temporary solution
-                window.location.reload();
+                // window.location.reload();
+                this.renderKey += 1;
             },
         },
     }
