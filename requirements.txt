@@ -5,3 +5,5 @@ django-allauth
 django-rest-auth
 django-webpack-loader
 django-cors-headers
+drf-tracking
+django-request-logging

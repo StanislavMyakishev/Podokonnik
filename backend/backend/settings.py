@@ -176,7 +176,7 @@ EMAIL_USE_TLS = True
 
 SITE_ID = 1
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Moscow'
 
