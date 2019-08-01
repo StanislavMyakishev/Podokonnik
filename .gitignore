@@ -26,6 +26,4 @@ yarn-error.log*
 #backend
 backend/backend/__pycache__/
 backend/app/__pycache__/
-backend/app/migrations/
-backend/db.sqlite3
 backend/site.log
