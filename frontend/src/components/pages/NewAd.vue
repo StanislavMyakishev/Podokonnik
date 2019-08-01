@@ -64,7 +64,7 @@
 
 <script>
     import axios from 'axios'
-    const url = 'http://127.0.0.1:8000/api/ads/';
+    const url = 'http://0.0.0.0:8000/api/ads/';
 
     export default {
         data: () => ({
@@ -96,13 +96,16 @@
         methods: {
             postPost() {
                 if (this.$refs.form.validate()) {
-                    let date = new Date()
+                    let date = new Date();
+                    let month = '' + date.getMonth(), day = '' + date.getDate();
+                    month.length === 1? month = '0' + date.getMonth() : month = date.getMonth();
+                    date.length === 1? day = '0' + date.getDate() : day = date.getDate();
                     const ad = {
                         "name": this.name,
                         "descr" : this.descr,
                         "price": this.price,
                         "category": this.select,
-                        "date": `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+                        "date": `${date.getFullYear()}-${month}-${day}`,
                     }
                     axios
                         .post(url, JSON.stringify(ad), {
