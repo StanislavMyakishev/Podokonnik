@@ -37,7 +37,7 @@ export default new Router({
             name: 'Test',
             component: Test
         },{
-            path: '/new',
+            path: '/newad',
             name: 'NewAd',
             component: NewAd
         },{

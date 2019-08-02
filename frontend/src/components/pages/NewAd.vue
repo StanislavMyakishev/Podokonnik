@@ -33,9 +33,10 @@
                                         required
                                 ></v-text-field>
                                 <v-select
-                                        :items="items"
-                                        item-text="text"
-                                        item-value="value"
+                                        :items="categories"
+                                        v-model="select"
+                                        item-text="name"
+                                        item-value="id"
                                         label="Категория"
                                         :rules="selectRules"
                                         required
@@ -64,20 +65,18 @@
 
 <script>
     import axios from 'axios'
-    const url = 'http://127.0.0.1:8000/api/ads/';
+    const adsUrl = 'http://0.0.0.0:8000/api/ads/';
+    const catUrl = 'http://0.0.0.0:8000/api/categories/';
 
     export default {
         data: () => ({
             valid: true,
-            errors: [],
+            errors: [{id: '', name: ''}],
             name: '',
             descr: '',
             price: '',
             select: null,
-            items: [
-                {value: 1, text: 'Продукты'},
-                {value: 2, text: 'Электроника'},
-            ],
+            categories: [{id: '', name: ''}],
             nameRules: [
                 v => !!v || 'Назовите объявление',
                 v => (v && v.length >= 10) || 'Название объявления должно содержать минимум 10 символов'
@@ -93,10 +92,16 @@
                 v => !!v || "Выберите категорию объявления"
             ],
         }),
+        mounted() {
+            axios
+                .get(catUrl)
+                .then(response => (this.categories = response.data))
+                .catch(e => {this.errors.push(e)})
+        },
         methods: {
             postPost() {
                 if (this.$refs.form.validate()) {
-                    let date = new Date()
+                    let date = new Date();
                     const ad = {
                         "name": this.name,
                         "descr" : this.descr,
@@ -105,13 +110,14 @@
                         "date": `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
                     }
                     axios
-                        .post(url, JSON.stringify(ad), {
+                        .post(adsUrl, JSON.stringify(ad), {
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
                             }
                         })
                         .catch(e => {this.errors.push(e)})
+                    this.$router.push('/myads')
                 }
             },
             clear() {
