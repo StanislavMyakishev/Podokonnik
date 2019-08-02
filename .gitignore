@@ -29,4 +29,4 @@ yarn-error.log*
 #backend
 backend/backend/__pycache__/
 backend/app/__pycache__/
-backend/site.log
+backend/site.log*

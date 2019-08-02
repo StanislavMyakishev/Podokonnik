@@ -68,16 +68,23 @@
                 showDelete: false,
                 ads: [],
                 id: NaN,
+                interval: null,
                 errors: [],
             };
         },
-        mounted() {
-            axios
-                .get(url)
-                .then(response => (this.ads = response.data))
-                .catch(e => {this.errors.push(e)})
+        created () {
+            this.interval = setInterval(this.refreshData, 5)
+        },
+        beforeDestroy () {
+            clearInterval(this.interval)
         },
         methods: {
+            refreshData(){
+                axios
+                    .get(url)
+                    .then(response => (this.ads = response.data))
+                    .catch(e => {this.errors.push(e)})
+            },
             pushIndex(index){
                 this.id = index;
                 this.showDelete = true;
@@ -87,10 +94,7 @@
                     .then(() => {this.ads.slice(this.id, 1)})
                     .then(() => {this.renderKey += 1})
                     .then(() => {this.showDelete = false})
-                    .catch(e => {this.errors.push(e)});
-                //temporary solution
-                // window.location.reload();
-                this.renderKey += 1;
+                    .catch(e => {this.errors.push(e)})
             },
         },
     }
