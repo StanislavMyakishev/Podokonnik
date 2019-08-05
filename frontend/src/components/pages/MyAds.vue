@@ -124,11 +124,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
-
-    const adsUrl = 'http://0.0.0.0:8000/api/ads/';
-    const catUrl = 'http://0.0.0.0:8000/api/categories/';
-
     export default {
         data() {
             return {
@@ -137,15 +132,10 @@
                 adDescr: '',
                 adPrice: '',
                 adCategory: '',
-                categories: null,
                 renderKey: 0,
                 showDelete: false,
                 showEdit: false,
-                ad: [],
-                ads: [],
                 id: NaN,
-                interval: null,
-                errors: [],
                 nameRules: [
                     v => !!v || 'Назовите объявление',
                     v => (v && v.length >= 10) || 'Название объявления должно содержать минимум 10 символов'
@@ -163,68 +153,62 @@
             };
         },
         created() {
-            this.interval = setInterval(this.refreshData, 5)
+            this.interval = setInterval(this.refreshData, 5);
         },
         beforeDestroy() {
-            clearInterval(this.interval)
+            clearInterval(this.interval);
         },
         mounted() {
-            axios
-                .get(catUrl)
-                .then(response => (this.categories = response.data))
-                .catch(e => {
-                    this.errors.push(e)
-                })
+            this.$store.dispatch('GET_ADS');
+            this.$store.dispatch('GET_CATEGORIES');
+        },
+        computed: {
+            categories() {
+                return this.$store.getters.CATEGORIES;
+            },
+            ads() {
+                return this.$store.getters.ADS;
+            },
+            ad() {
+                return this.$store.getters.AD;
+            },
         },
         methods: {
             refreshData() {
-                axios
-                    .get(adsUrl)
-                    .then(response => (this.ads = response.data))
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
+                this.$store.dispatch('GET_ADS');
             },
             pushIndexDelete(index) {
                 this.id = index;
                 this.showDelete = true;
             },
-            pushIndexEdit(index) {
+            async pushIndexEdit(index){
                 this.id = index;
-                axios
-                    .get(adsUrl + this.id)
-                    .then(response => (this.ad = response.data))
-                    .then(() => this.adName = this.ad.name)
-                    .then(() => this.adPrice = this.ad.price)
-                    .then(() => this.adDescr = this.ad.descr)
-                    .then(() => this.renderKey += 1)
-                    .catch(e => {
-                        this.errors.push(e)
-                    });
-                setTimeout(() => this.showEdit = true, 5)
+                await this.$store.dispatch('GET_AD', this.id);
+                this.adName = this.ad.name;
+                this.adPrice = this.ad.price;
+                this.adDescr = this.ad.descr;
+                this.renderKey += 1;
+                setTimeout(() => this.showEdit = true, 5);
             },
-            deleteAd() {
-                axios.delete(adsUrl + this.id)
+            async deleteAd() {
+                await this.$store.dispatch('DELETE_AD', this.id)
                     .then(() => {
                         this.ads.slice(this.id, 1)
                     })
                     .then(() => {
                         this.showDelete = false
                     })
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
             },
-            patchPost() {
+            async patchPost() {
                 if (this.$refs.form.validate()) {
-                    axios
-                        .patch(adsUrl + this.id, {
-                            'name': this.adName,
-                            'descr':  this.adDescr,
-                            'price': this.adPrice,
-                            'category': this.adCategory,
-                    })
-                        .catch(e => {this.errors.push(e)})
+                    await this.$store.dispatch('PATCH_ADS', {
+                        'id': this.id,
+                        'name': this.adName,
+                        'descr':  this.adDescr,
+                        'price': this.adPrice,
+                        'category': this.adCategory,
+                    });
+                    this.showEdit = false;
                 }
             },
         },

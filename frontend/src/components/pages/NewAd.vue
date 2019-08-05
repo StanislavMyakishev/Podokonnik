@@ -64,19 +64,13 @@
 
 
 <script>
-    import axios from 'axios'
-    const adsUrl = 'http://0.0.0.0:8000/api/ads/';
-    const catUrl = 'http://0.0.0.0:8000/api/categories/';
-
     export default {
         data: () => ({
             valid: true,
-            errors: [{id: '', name: ''}],
             name: '',
             descr: '',
             price: '',
             select: null,
-            categories: [{id: '', name: ''}],
             nameRules: [
                 v => !!v || 'Назовите объявление',
                 v => (v && v.length >= 10) || 'Название объявления должно содержать минимум 10 символов'
@@ -93,10 +87,12 @@
             ],
         }),
         mounted() {
-            axios
-                .get(catUrl)
-                .then(response => (this.categories = response.data))
-                .catch(e => {this.errors.push(e)})
+            this.$store.dispatch('GET_CATEGORIES');
+        },
+        computed: {
+            categories() {
+                return this.$store.getters.CATEGORIES;
+            },
         },
         methods: {
             postPost() {
@@ -108,15 +104,8 @@
                         "price": this.price,
                         "category": this.select,
                         "date": `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
-                    }
-                    axios
-                        .post(adsUrl, JSON.stringify(ad), {
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                            }
-                        })
-                        .catch(e => {this.errors.push(e)})
+                    };
+                    this.$store.dispatch('POST_ADS', ad);
                     this.$router.push('/myads')
                 }
             },
