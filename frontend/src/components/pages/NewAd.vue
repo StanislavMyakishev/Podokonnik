@@ -33,9 +33,10 @@
                                         required
                                 ></v-text-field>
                                 <v-select
-                                        :items="items"
-                                        item-text="text"
-                                        item-value="value"
+                                        :items="categories"
+                                        v-model="select"
+                                        item-text="name"
+                                        item-value="id"
                                         label="Категория"
                                         :rules="selectRules"
                                         required
@@ -63,21 +64,13 @@
 
 
 <script>
-    import axios from 'axios'
-    const url = 'http://127.0.0.1:8000/api/ads/';
-
     export default {
         data: () => ({
             valid: true,
-            errors: [],
             name: '',
             descr: '',
             price: '',
             select: null,
-            items: [
-                {value: 1, text: 'Продукты'},
-                {value: 2, text: 'Электроника'},
-            ],
             nameRules: [
                 v => !!v || 'Назовите объявление',
                 v => (v && v.length >= 10) || 'Название объявления должно содержать минимум 10 символов'
@@ -93,25 +86,27 @@
                 v => !!v || "Выберите категорию объявления"
             ],
         }),
+        mounted() {
+            this.$store.dispatch('GET_CATEGORIES');
+        },
+        computed: {
+            categories() {
+                return this.$store.getters.CATEGORIES;
+            },
+        },
         methods: {
             postPost() {
                 if (this.$refs.form.validate()) {
-                    let date = new Date()
+                    let date = new Date();
                     const ad = {
                         "name": this.name,
                         "descr" : this.descr,
                         "price": this.price,
                         "category": this.select,
                         "date": `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
-                    }
-                    axios
-                        .post(url, JSON.stringify(ad), {
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                            }
-                        })
-                        .catch(e => {this.errors.push(e)})
+                    };
+                    this.$store.dispatch('POST_ADS', ad);
+                    this.$router.push('/myads')
                 }
             },
             clear() {

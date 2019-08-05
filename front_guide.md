@@ -31,7 +31,11 @@
     * Material icons
     ```shell
     $ npm install --save material-icons
-    ``` 
+    ```
+    * Vuex
+    ```shell
+    $ npm install vuex --save
+    ```  
 4. Запуск проекта
     ```shell
     $ npm run serve
@@ -45,3 +49,4 @@
 * [Vue-router](https://router.vuejs.org/ru/)
 * [Axios](https://www.npmjs.com/package/vue-axios)
 * [Material icons](https://www.npmjs.com/package/material-icons)
+* [Vuex](https://vuex.vuejs.org/ru/installation.html)
