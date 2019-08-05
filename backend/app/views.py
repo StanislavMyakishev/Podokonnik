@@ -1,15 +1,17 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny
 
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_tracking.mixins import LoggingMixin
+from allauth.account.adapter import get_adapter
 
 from .models import Ad, Category, Author
-from .serializers import AdSerializer, CategorySerializer, UserSerializer
+from .serializers import AdSerializer, CategorySerializer
 
 @api_view()
 def null_view(request):

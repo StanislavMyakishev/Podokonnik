@@ -49,10 +49,10 @@ INSTALLED_APPS = [
     'app',
     'webpack_loader',
     'corsheaders',
-    'rest_framework_tracking'
+    'rest_framework_tracking',
 ]
 
-##AUTH_USER_MODEL = 'app.Author'
+AUTH_USER_MODEL = 'app.Author'
 
 
 MIDDLEWARE = [
@@ -127,7 +127,11 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
+}
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'app.serializers.RegisterSerializer',
 }
 
 
@@ -163,7 +167,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = reverse_lazy('account_confirm_complete')
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = reverse_lazy('account_confirm_complete')
-
+LOGOUT_ON_PASSWORD_CHANGE = True
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ksercs0@gmail.com'

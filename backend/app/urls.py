@@ -16,7 +16,6 @@ urlpatterns = [
     path('ads/<int:pk>', SingleAdView.as_view()),
     path('categories/', CategoryView.as_view()),
     path('categories/<int:pk>', SingleCategoryView.as_view()),
-    # path('users/register/', CreateUserView.as_view()),
 
 
     # Override urls

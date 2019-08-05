@@ -1,20 +1,31 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
 
-from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
+
+from .managers import MyUserManager
 
 
-class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=14)
+class Author(AbstractUser):
+    email = models.EmailField(_('email address'), unique=True)
     room = models.CharField(max_length=100)
+    phone = models.CharField(max_length=14)
+    first_name = models.CharField(max_length=14)
+    last_name = models.CharField(max_length=14)
+
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = MyUserManager()
 
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
 
     def __str__(self):
-        return str(self.user) + ' - ' + self.user.first_name + ' ' + self.user.last_name
+        return str(self.first_name) + " " + str(self.last_name) + " (" + str(self.email) + ") "
 
 
 class Category(models.Model):
@@ -34,9 +45,9 @@ class Ad(models.Model):
     date = models.DateField(default=timezone.now)
     price = models.IntegerField(default=0)
     category = models.ForeignKey('Category', null=True, 
-        related_name='ads', on_delete=models.CASCADE)
-    author = models.ForeignKey('Author', null=True,
-        related_name='ads', on_delete=models.CASCADE)
+        related_name='ads_in_cat', on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, null=True,
+        related_name='ads_by_author', on_delete=models.CASCADE)
     favorite_for = models.ManyToManyField('Author', verbose_name="Favorite for users",
         related_name='favorite_ads', blank=True)
 
